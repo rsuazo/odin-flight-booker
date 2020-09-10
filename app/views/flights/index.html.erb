@@ -1,0 +1,22 @@
+
+<h1>Search for a Flight!</h1>
+<body><br><br>
+
+  <%= form_with(url: "/flights", method: "get") do %>
+  
+  <%= label_tag(:q, "From Airport:") %>
+  <%= text_field_tag(:q) %><br><br>
+
+  <%= label_tag(:q, "To Airport:") %>
+  <%= text_field_tag(:q) %><br><br>
+
+  <%= label_tag(:q, "Number of Passengers:") %>
+  <%= number_field_tag(:q, min: 1, max: 4) %><br><br>
+
+  <%= label_tag(:q, "Date:") %>
+  <%= date_field_tag(:q) %><br><br>
+
+  <%= submit_tag("Search Flights") %>
+  <% end %>
+
+</body>
