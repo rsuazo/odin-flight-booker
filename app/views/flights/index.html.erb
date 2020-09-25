@@ -3,7 +3,7 @@
 
 <body><br><br>
 
-  <%= form_with(url: "/flights", method: "get", local: true) do %>
+  <%= form_with(url: "/bookings/new", method: "get", local: true) do %>
 
     <%= label_tag(:from_airport_id, "From Airport:") %>
     <%= select_tag(:from_airport, options_for_select(@airport_options, params[:from_airport])) %> <br><br>
@@ -24,11 +24,11 @@
 <br>
 <br>
 
-
     <h1>Flight Details</h1>
 
       <table style="width:100%">
       <tr>
+        <th>Selection</th>
         <th>Flight ID</th>
         <th>From Airport</th>
         <th>To Airport</th>
@@ -36,16 +36,21 @@
         <th>Flight Duration</th>
       </tr>
       
+
+    <%= form_with(url: "/flights", method: "get", local: true) do %>
+
       <% @flights.each do |flight| %>
         <tr>
-          <td><%= flight.id %></td>
-          <td><%= flight.from_airport.code %></td>
-          <td><%= flight.to_airport.code %></td>
-          <td><%= flight.start_date.strftime("%m / %d / %Y")%></td>
-          <td><%= flight.flight_duration %></td>
+          <td style="text-align:center"><%= radio_button_tag(:flight_id, flight.id) %></td>
+          <td style="text-align:center"><%= flight.id %></td>
+          <td style="text-align:center"><%= flight.from_airport.code %></td>
+          <td style="text-align:center"><%= flight.to_airport.code %></td>
+          <td style="text-align:center"><%= flight.start_date.strftime("%m / %d / %Y")%></td>
+          <td style="text-align:center"><%= flight.flight_duration %></td>
         </tr>
       <% end %>
     </table>
-
-
+    <br><br>
+    <%= submit_tag("Book Flight!") %>
+    <% end %>
 </body>
