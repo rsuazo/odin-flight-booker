@@ -1,22 +1,51 @@
 
 <h1>Search for a Flight!</h1>
+
 <body><br><br>
 
-  <%= form_with(url: "/flights", method: "get") do %>
-  
-  <%= label_tag(:q, "From Airport:") %>
-  <%= text_field_tag(:q) %><br><br>
+  <%= form_with(url: "/flights", method: "get", local: true) do %>
 
-  <%= label_tag(:q, "To Airport:") %>
-  <%= text_field_tag(:q) %><br><br>
+    <%= label_tag(:from_airport_id, "From Airport:") %>
+    <%= select_tag(:from_airport, options_for_select(@airport_options, params[:from_airport])) %> <br><br>
 
-  <%= label_tag(:q, "Number of Passengers:") %>
-  <%= number_field_tag(:q, min: 1, max: 4) %><br><br>
+    <%= label_tag(:to_airport_id, "To Airport:") %>
+    <%= select_tag(:to_airport, options_for_select(@airport_options, params[:to_airport])) %> <br><br>
 
-  <%= label_tag(:q, "Date:") %>
-  <%= date_field_tag(:q) %><br><br>
+    <%= label_tag(:passengers, "Number of Passengers:") %>
+    <%= number_field_tag(:passengers, value = 1, in: 1..4) %> <br><br>
 
-  <%= submit_tag("Search Flights") %>
+    <%= label_tag(:start_datetime, "Date:") %>
+    <%= date_field_tag(:start_date, Date.today) %> <br><br>
+
+    <%= submit_tag("search") %>
   <% end %>
+
+<br>
+<br>
+<br>
+
+
+    <h1>Flight Details</h1>
+
+      <table style="width:100%">
+      <tr>
+        <th>Flight ID</th>
+        <th>From Airport</th>
+        <th>To Airport</th>
+        <th>Flight Date</th>
+        <th>Flight Duration</th>
+      </tr>
+      
+      <% @flights.each do |flight| %>
+        <tr>
+          <td><%= flight.id %></td>
+          <td><%= flight.from_airport.code %></td>
+          <td><%= flight.to_airport.code %></td>
+          <td><%= flight.start_date.strftime("%m / %d / %Y")%></td>
+          <td><%= flight.flight_duration %></td>
+        </tr>
+      <% end %>
+    </table>
+
 
 </body>
