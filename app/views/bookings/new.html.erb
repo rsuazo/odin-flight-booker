@@ -1,0 +1,50 @@
+
+<h1 style="text-align:center">Book Your Flight!</h1>
+
+<body><br>
+
+ <h2>Booking Details</h2>
+
+      <table style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>From Airport</th>
+        <th>To Airport</th>
+        <th>Flight ID</th>
+        <th>Flight Duration</th>
+        <th>Number of Passengers</th>
+      </tr>
+      
+        <tr>
+          <td style="text-align:center"><%= @flight.start_date.strftime("%m / %d / %Y")%></td>
+          <td style="text-align:center"><%= @flight.from_airport.code %></td>
+          <td style="text-align:center"><%= @flight.to_airport.code %></td>
+          <td style="text-align:center"><%= @flight.id %></td>
+          <td style="text-align:center"><%= distance_of_time_in_words(@flight.flight_duration) %></td>
+          <td style="text-align:center"><%= @passengers %></td>
+        </tr>
+    </table><br><br>
+
+
+  <h2>Passenger Details</h2><br>
+ 
+  <%= form_with model: @booking, local:true do |booking_form| %>
+    <ul>
+      <% @booking.passengers.each do |passenger| %>
+        <%= booking_form.fields_for passenger, index: passenger.id do |passengers_form| %>
+          <li>
+            <%= passengers_form.label :name %>
+            <%= passengers_form.text_field :name %><br><br>
+            <%= passengers_form.label :email %>
+            <%= passengers_form.email_field :email %><br><br>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+    <%= hidden_field_tag(:flight_id, params[:flight_id]) %>
+    <%= hidden_field_tag(:passengers, params[:passengers]) %>
+    <%= submit_tag("Submit") %>
+  <% end %>
+
+  
+</body>

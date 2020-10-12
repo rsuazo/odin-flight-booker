@@ -1,5 +1,5 @@
 
-<h1>Search for a Flight!</h1>
+<h1 style="text-align:center">Search for a Flight!</h1>
 
 <body><br><br>
 
@@ -12,7 +12,7 @@
     <%= select_tag(:to_airport, options_for_select(@airport_options, params[:to_airport])) %> <br><br>
 
     <%= label_tag(:passengers, "Number of Passengers:") %>
-    <%= number_field_tag(:passengers, value = 1, in: 1..4) %> <br><br>
+    <%= number_field_tag(:passengers, value = @default, in: 1..4) %> <br><br>
 
     <%= label_tag(:start_datetime, "Date:") %>
     <%= date_field_tag(:start_date, Date.today) %> <br><br>
@@ -46,11 +46,14 @@
           <td style="text-align:center"><%= flight.from_airport.code %></td>
           <td style="text-align:center"><%= flight.to_airport.code %></td>
           <td style="text-align:center"><%= flight.start_date.strftime("%m / %d / %Y")%></td>
-          <td style="text-align:center"><%= flight.flight_duration %></td>
+          <td style="text-align:center"><%= distance_of_time_in_words(flight.flight_duration) %></td>
+          
         </tr>
       <% end %>
     </table>
     <br><br>
+
+    <%= hidden_field_tag(:passengers, params[:passengers]) %>
     <%= submit_tag("Book Flight!") %>
     <% end %>
 </body>
