@@ -11,16 +11,22 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.create(flight_id: params[:flight_id])
 
-    test = Booking.create(flight_id: 6)
+    users = params[:booking][:passenger]
 
-    Passenger.create(name: "BMW", email: "piper@BMW.com")
-    
+    users.each do |user|
+      @booking.passengers << Passenger.create(name: user[:name], email: user[:email])
+    end
+
+
     # Passenger.create(name: params[:booking][:passenger][0][:name], email: params[:booking][:passenger][0][:email])
+
+    # test = Booking.create(flight_id: 6)
+
+    # Passenger.create(name: "BMW", email: "piper@BMW.com")
   
     # @booking.passengers << 
     
     # @booking.passengers 
-
 
     # Booking.create(flight_id: 1)
 
