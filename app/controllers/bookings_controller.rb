@@ -11,34 +11,18 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.create(flight_id: params[:flight_id])
 
-    users = params[:booking][:passenger]
+    @users = params[:booking][:passenger]
 
-    users.each do |user|
+    @users.each do |user|
       @booking.passengers << Passenger.create(name: user[:name], email: user[:email])
     end
 
+    redirect_to booking_path(@booking.id)
+  end
 
-    # Passenger.create(name: params[:booking][:passenger][0][:name], email: params[:booking][:passenger][0][:email])
-
-    # test = Booking.create(flight_id: 6)
-
-    # Passenger.create(name: "BMW", email: "piper@BMW.com")
-  
-    # @booking.passengers << 
-    
-    # @booking.passengers 
-
-    # Booking.create(flight_id: 1)
-
-    # Passenger.create(name: "Robert", email: "rsuazo@gmail.com")
-    # Passenger.create(name: "Tiffany", email: "tsuazo@gmail.com")
-    # Passenger.create(name: "Patricia", email: "pringhofer@gmail.com")
-    # Passenger.create(name: "Abigail", email: "aringhofer@gmail.com")
-
-    # Booking.find(1).passengers << Passenger.find(1)
-    # Booking.find(1).passengers << Passenger.find(2)
-    # Booking.find(2).passengers << Passenger.find(3)
-    # Booking.find(2).passengers << Passenger.find(4)
+  def show
+    @booking = Booking.find(params[:id])
+    @flight = @booking.flight
   end
 
   private

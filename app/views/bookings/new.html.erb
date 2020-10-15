@@ -3,9 +3,10 @@
 
 <body><br>
 
+
  <h2>Booking Details</h2>
 
-      <table style="width:100%">
+    <table style="width:100%">
       <tr>
         <th>Date</th>
         <th>From Airport</th>
@@ -42,9 +43,6 @@
       <% end %>
     </ul>
     <%= hidden_field_tag(:flight_id, params[:flight_id]) %>
-    <%= hidden_field_tag(:passengers, params[:passengers]) %>
     <%= submit_tag("Submit") %>
   <% end %>
-
-  
 </body>
