@@ -22,7 +22,17 @@ class BookingsController < ApplicationController
     @users = params[:booking][:passenger]
 
     @users.each do |user|
-      @booking.passengers << Passenger.create(name: user[:name], email: user[:email])
+      @passenger = Passenger.new(name: user[:name], email: user[:email])
+
+      if @passenger.save
+        @booking.passengers << @passenger
+        PassengerMailer.with(user: @passenger).welcome_email.deliver_now
+      end
+      
+      
+      
+      #@booking.passengers << Passenger.create(name: user[:name], email: user[:email])
+      
     end
 
     redirect_to booking_path(@booking.id)
