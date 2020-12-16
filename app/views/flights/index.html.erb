@@ -37,7 +37,7 @@
       </tr>
       
 
-    <%= form_with(url: '/bookings/new', method: 'get') do %>
+    <%= form_with(url: '/bookings/new', method: 'get', local: true) do %>
 
       
       <% @flights.each do |flight| %>
