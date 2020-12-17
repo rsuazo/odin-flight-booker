@@ -1,3 +1,6 @@
+require 'sendgrid-ruby'
+include SendGrid
+
 class BookingsController < ApplicationController
   def new
     @booking = Booking.new
@@ -27,8 +30,7 @@ class BookingsController < ApplicationController
       if @passenger.save
         @booking.passengers << @passenger
 
-        require 'sendgrid-ruby'
-        include SendGrid
+
         
         from = Email.new(email: 'test@example.com')
         to = Email.new(email: 'test@example.com')
