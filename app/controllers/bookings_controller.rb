@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
 
         from = Email.new(email: 'test@example.com')
         subject = 'Hello World from the SendGrid Ruby Library!'
-        to = Email.new(email: 'test@example.com')
+        to = Email.new(email: 'rsuazo2@gmail.com')
         content = Content.new(type: 'text/plain', value: 'Hello, Email!')
         mail = Mail.new(from, subject, to, content)
 
