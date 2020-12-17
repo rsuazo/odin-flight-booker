@@ -1,5 +1,8 @@
 class PassengerMailer < ApplicationMailer
     default from: 'rsuazo2@gmail.com'
+    require 'sendgrid-ruby'
+    include SendGrid
+    require 'json'
 
     def welcome_email
         @user = params[:user]
