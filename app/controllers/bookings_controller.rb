@@ -31,9 +31,9 @@ class BookingsController < ApplicationController
         @booking.passengers << @passenger
 
         from = SendGrid::Email.new(email: 'r69er87@gmail.com')
-        to = SendGrid::Email.new(email: 'rsuazo2@gmail.com')
-        subject = 'Sending with Twilio SendGrid is fun...'
-        content = SendGrid::Content.new(type: 'text/plain', value: 'and easy to do anywhere')
+        to = SendGrid::Email.new(email: 'tiffanyannsuazo@gmail.com')
+        subject = 'Youre a stinky butt...'
+        content = SendGrid::Content.new(type: 'text/plain', value: 'and I love you!')
         mail = SendGrid::Mail.new(from, subject, to, content)
         
         sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
