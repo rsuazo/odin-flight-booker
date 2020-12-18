@@ -1,6 +1,3 @@
-require 'sendgrid-ruby'
-include SendGrid
-
 class BookingsController < ApplicationController
   def new
     @booking = Booking.new
