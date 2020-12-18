@@ -31,9 +31,9 @@ class BookingsController < ApplicationController
         @booking.passengers << @passenger
 
         from = SendGrid::Email.new(email: 'r69er87@gmail.com')
-        to = SendGrid::Email.new(email: 'tiffanyannsuazo@gmail.com')
-        subject = 'Youre a stinky butt...'
-        content = SendGrid::Content.new(type: 'text/plain', value: 'and I love you!')
+        to = SendGrid::Email.new(email: @passenger.email)
+        subject = 'Reservation Confirmation'
+        content = SendGrid::Content.new(type: 'text/plain', value: 'Thank you for choosing to stay with us. Wherever your travels take you, our friendly staff will be there every step of the way to ensure your experience is as enjoyable and comfortable as possible. On behalf of our entire team, thank you for allowing us to serve you.')
         mail = SendGrid::Mail.new(from, subject, to, content)
         
         sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
