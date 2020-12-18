@@ -29,13 +29,8 @@ class BookingsController < ApplicationController
 
       if @passenger.save
         @booking.passengers << @passenger
-        # PassengerMailer.with(user: @passenger).welcome_email.deliver_now
+        PassengerMailer.with(user: @passenger).welcome_email.deliver_now
       end
-      
-      
-      
-      #@booking.passengers << Passenger.create(name: user[:name], email: user[:email])
-      
     end
 
     redirect_to booking_path(@booking.id)
