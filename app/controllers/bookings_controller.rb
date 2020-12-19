@@ -26,7 +26,8 @@ class BookingsController < ApplicationController
 
       if @passenger.save
         @booking.passengers << @passenger
-        PassengerMailer.with(user: @passenger).welcome_email.deliver_now
+        @flight = Flight.find(params[:flight_id])
+        PassengerMailer.with(user: @passenger, flight: @flight).welcome_email.deliver_now
       end
     end
 

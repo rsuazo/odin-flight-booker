@@ -2,17 +2,60 @@
 
 <html>
   <head>
+  <style>
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 10px;
+}
+</style>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to example.com, <%= @user.name %></h1>
+    <h1>Confirmation Details</h1>
     <p>
-      You have successfully signed up to example.com,
-      your email is: <%= @user.email %>.<br>
+      Hello <%= @user.name %>, you have successfully booked your flight with Suazo Airlines! Here are your flight details:<br>
     </p>
-    <p>
-      To login to the site, just follow this link: <%= @url %>.
-    </p>
-    <p>Thanks for joining and have a great day!</p>
+<h2>Passenger Details</h2>
+  <table style="width:50%">
+    <tr>
+      <th>Passenger Name</th>
+      <td><%=@user.name %></td>
+    </tr>
+    <tr>
+      <th>Passenger Email</th>
+      <td><%=@user.email %></td>
+    </tr>
+    </table>
+
+    <h2>Flight Details</h2>
+    <table style="width:50%">
+    <tr>
+      <th>Flight Number</th>
+      <td><%=@flight.id %></td>
+    </tr>
+    <tr>
+      <th>Flight Duration</th>
+      <td><%=distance_of_time_in_words(@flight.flight_duration) %></td>
+    </tr>
+    <tr>
+      <th>Departure Date</th>
+      <td><%=@flight.start_date.strftime("%m / %d / %Y") %></td>
+    </tr>
+    <tr>
+      <th>Departing</th>
+      <td><%=@flight.from_airport.code %></td>
+    </tr>
+    <tr>
+      <th>Arrival</th>
+      <td><%=@flight.to_airport.code %></td>
+    </tr>
+  </table>
+
+    <p>Thanks for flying with Suazo Airlines and have a great day!</p>
+
   </body>
 </html>
+
